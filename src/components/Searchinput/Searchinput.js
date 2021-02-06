@@ -4,7 +4,7 @@ import styles from './Searchinput.module.css';
 const SearchInput = ({...rest}) => {
     return(
         <div className={styles.wrapper}>
-            <SearchRounded />
+            <SearchRounded color="inherit" />
             <input  className={styles.input} {...rest} />
         </div>
     )
