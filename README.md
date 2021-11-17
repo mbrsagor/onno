@@ -1,28 +1,50 @@
-# word-ranks
+# Onno
+> Onno Backend API web Server.
 
-`word-ranks` is a searching country and related country famoush location or something. In the project backend will coming soon Django and sitll now frontend `react.js` and `next.js`.  
+### Setup
+The following steps will walk you thru installation on a Mac. I think Linux should be similar. It's also possible to develop on a Windows machine, but I have not documented the steps. If you've developed django apps on Windows, you should have little problem getting up and running.
 
-###### Table of contents:
-- List of countries fetched from server and listview.
-- Country details page and related country.
-- Searching + filtering system from API
-- Fetch data from server.
-  - Fetch API using.
-- Material UI and icons.
-- Responsive web design.
+#### Prerequisites
+- Python3.8.5
+- Django 3.1.6
+- PostgreSQL 12.5
 
-```bash
-git clone https://github.com/mbrsagor/word-ranks.git
-git word-ranks
-npm install --save
-npm run dev
-# or
-yarn dev
+###### Create database 
+> Open your terminal, shell, or ZSH
+```base
+psql postgres
+create database "onno";
+create user "onnoUser";
+GRANT ALL PRIVILEGES ON DATABASE "onno" TO "onnoUser";
+ALTER USER onnoUser CREATEDB;
+CREATE EXTENSION postgis;
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+> Then go to config config/db_dev.config.py
+###### Example:
+```python
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'onno',
+        'USER': 'onnoUser',
+        'PASSWORD': '12345',
+        'HOST': 'localhost',
+        # 'PORT': '',
+    }
+}
+```
 
-Install material UI icon
+###### Backend server run locally.
+> Please follow the instruction for run the backend server in your local dev server.
 ```base
-yarn add @material-ui/core @material-ui/icons
+git clone https://github.com/ProlificTechSolution-Onno/onno.git
+cd onno
+virtualenv venv --python=python3.8
+source venv/bin/activate
+./manage.py makemigrations accounts
+./manage.py migrate accounts
+./manage.py migrate
+./manage.py createsuperuser
+./manage.py runserver
 ```
