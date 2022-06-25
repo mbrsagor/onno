@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 import os
+import environ
 from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -18,14 +19,20 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
+env = environ.Env(
+    DEBUG=(bool, False),
+    ALLOWED_HOSTS=list
+)
+env_path = os.path.join(BASE_DIR, '.env')
+environ.Env.read_env(env_path)
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '6l(nyfc4x7u@_f3ug6eqgvz@b!+l54o3b(#ddggj9^t31n=@$i'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env("DEBUG")
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env('ALLOWED_HOSTS')
 
 # Application definition
 
@@ -153,8 +160,8 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
     'DATETIME_FORMAT': '%Y-%m-%d %I:%M %p ',
-    'Date_FORMAT': '%Y-%m-%d %I:%M %p ',
-    'Time_FORMAT': '%I:%M %p ',
+    'Date_FORMAT': '%Y-%m-%d %I:%M %p',
+    'Time_FORMAT': '%I:%M %p',
 }
 
 # JWT configurations
@@ -167,10 +174,10 @@ SIMPLE_JWT = {
 
 # SMTP Connfiguration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'mail.onno.com'
-EMAIL_HOST_USER = 'onno@domain.com'
-EMAIL_HOST_PASSWORD = 'abcdef'
-DEFAULT_FROM_EMAIL = 'nno@domain.com'
-SERVER_EMAIL = 'onno@domain.com'
-EMAIL_PORT = 25
-EMAIL_USE_TLS = False
+EMAIL_HOST = env('EMAIL_HOST')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
+SERVER_EMAIL = env('SERVER_EMAIL')
+EMAIL_PORT = env('EMAIL_PORT')
+EMAIL_USE_TLS = env('EMAIL_USE_TLS')
