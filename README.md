@@ -1,5 +1,5 @@
 # Onno
-> Onno Backend API web Server.
+> Online food order & delivery system backend API web application.
 
 ### Setup
 The following steps will walk you thru installation on a Mac. I think Linux should be similar. It's also possible to develop on a Windows machine, but I have not documented the steps. If you've developed django apps on Windows, you should have little problem getting up and running.
@@ -30,7 +30,7 @@ DATABASES = {
         'USER': 'onnoUser',
         'PASSWORD': '12345',
         'HOST': 'localhost',
-        # 'PORT': '',
+        'PORT': '',
     }
 }
 ```
