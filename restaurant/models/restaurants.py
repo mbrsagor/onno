@@ -12,7 +12,7 @@ class Restaurant(BaseEntity):
     owner = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name='restaurant')
     name = models.CharField(max_length=120)
     sub_domain = models.CharField(max_length=180, blank=True, null=True)
-    avatar = models.ImageField(upload_to='restaurant_avatar', blank=True, null=True)
+    avatar = models.ImageField(upload_to='restaurantAvatar', blank=True, null=True)
 
     def __str__(self):
         return self.name

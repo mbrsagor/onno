@@ -6,7 +6,7 @@ from restaurant.models.outlets import Outlet
 
 
 class Inventory(BaseEntity):
-    outlet = models.ForeignKey(Outlet, on_delete=models.CASCADE, related_name='outlet_inventory')
+    outlet = models.ForeignKey(Outlet, on_delete=models.CASCADE, related_name='outletInventory')
     title = models.CharField(max_length=120)
     slug = models.SlugField(null=True, blank=True)
     description = models.TextField()
@@ -15,7 +15,7 @@ class Inventory(BaseEntity):
     discount_price = models.FloatField(null=True, blank=True)
     parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True, related_name='child')
     is_active = models.BooleanField(default=True)
-    avatar = models.ImageField(upload_to='inventory_avatar', null=True, blank=True)
+    avatar = models.ImageField(upload_to='inventoryAvatar', null=True, blank=True)
     item_type = models.CharField(max_length=10, choices=InventoryType.choices, default=InventoryType.ITEM)
 
     def __str__(self):
@@ -23,7 +23,7 @@ class Inventory(BaseEntity):
 
 
 class Menus(BaseEntity):
-    outlet = models.ForeignKey(Outlet, on_delete=models.CASCADE, related_name='outlet_menu', blank=True, null=True)
+    outlet = models.ForeignKey(Outlet, on_delete=models.CASCADE, related_name='outletMenu', blank=True, null=True)
     name = models.CharField(max_length=120)
     platform = models.CharField(max_length=10, choices=PlatformChoice.choices, default=PlatformChoice.ONNO)
     notes = models.CharField(max_length=400)
@@ -35,15 +35,15 @@ class Menus(BaseEntity):
 
 class Category(models.Model):
     name = models.CharField(max_length=120)
-    menus = models.ForeignKey(Menus, on_delete=models.CASCADE, related_name='category')
-    items = models.ManyToManyField(Inventory, blank=True, related_name='category')
+    menus = models.ForeignKey(Menus, on_delete=models.CASCADE, related_name='Menucategory')
+    items = models.ManyToManyField(Inventory, blank=True, related_name='Itemcategory')
 
     def __str__(self):
         return self.name
 
 
 class Modifier(BaseEntity):
-    outlet = models.ForeignKey(Outlet, on_delete=models.CASCADE, related_name='outlet_modifier', blank=True, null=True)
+    outlet = models.ForeignKey(Outlet, on_delete=models.CASCADE, related_name='outletModifier', blank=True, null=True)
     name = models.CharField(max_length=200)
     display_name = models.CharField(max_length=200)
     min = models.IntegerField()
