@@ -17,6 +17,10 @@ class Restaurant(BaseEntity):
     def __str__(self):
         return self.name
 
+    @property
+    def owner_name(self):
+        return self.owner.username
+
     def save(self, *args, **kwargs):
         self.sub_domain = slugify(
             self.name + '-' + ''.join(random.choices(string.ascii_lowercase + string.digits, k=4)))
