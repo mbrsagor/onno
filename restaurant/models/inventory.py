@@ -20,6 +20,10 @@ class Inventory(BaseEntity):
 
     def __str__(self):
         return self.title[:30]
+    
+    @property
+    def outlet_name(self):
+        return self.outlet.name
 
 
 class Menus(BaseEntity):
@@ -53,3 +57,7 @@ class Modifier(BaseEntity):
 
     def __str__(self):
         return self.name
+
+    @property
+    def outlet_name(self):
+        return self.outlet.name
